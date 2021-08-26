@@ -11,7 +11,6 @@ function permutations(arr) { // function to grab all permutations of the list of
 
     for (let i = 0; i < arr.length; i = i + 1) {
       let newPerm = permutations(arr.slice(0, i).concat(arr.slice(i + 1))); // recursive variable that slices the array to form a new one
-  
       if(newPerm.length === 0) { 
         holdPerm.push([arr[i]]) // if newPerm was empty or had'nt been called push arr[i]
       } else {
@@ -20,7 +19,6 @@ function permutations(arr) { // function to grab all permutations of the list of
         }
       }
     }
-
     return holdPerm; // 
 }
 
@@ -36,6 +34,7 @@ function longestSubstring(arr) { // main function to get longest substring
         // current count storage on iteration
         let curCount = 0; 
         let curChar = null;
+        let currentWord = null;
 
         let chars = storage[i].split(""); // split the individual word into letters
         for (let j = 0; j < chars.length; j++) {
@@ -44,15 +43,17 @@ function longestSubstring(arr) { // main function to get longest substring
             } else {
                 curChar = chars[j]; // set letter
                 curCount = 1; //set count
+                currentWord = storage[i];
             }
 
             if (curCount > result.length) {
                 result.letter = curChar; // set results 
                 result.length = curCount;
+                result.word = currentWord;
             }
         }
 
-        if (!maxResult || maxResult.length < result.length) {
+        if (!maxResult|| maxResult.length < result.length) {
             maxResult = result; // set max result to largest letter count combo 
         }
     }
